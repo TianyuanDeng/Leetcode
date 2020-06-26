@@ -15,7 +15,7 @@ public class CompareVersionNumbers165 {
     public static int compareVersion(String version1, String version2) {
         String[] nums1 = version1.split("\\.");
         String[] nums2 = version2.split("\\.");
-        System.out.println(Arrays.toString(nums2));
+        System.out.println(Arrays.toString(nums2)); 
         int len1 = nums1.length;
         int len2 = nums2.length;
 
