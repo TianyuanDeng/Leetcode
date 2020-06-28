@@ -7,48 +7,43 @@ public class TestCase {
     private static int[] dp;
 
     public static void main(String[] args) {
-        String s = "ADOBECODEBANC";
-        String t = "ABC";
-        int[] count = new int[256];
-        for (char c : t.toCharArray()) {
-            count[c]++;
-        }
+        int x = 121;
+        String s = "()";
+        Stack<Integer> stack = new Stack<>();
+        int startIdx = -1;
+        int len = 0;
 
-        int start = 0, end = 0, startIdx = 0;
-        int len = t.length();
-        int minlen = Integer.MAX_VALUE;
-
-        while (end < s.length()) {
-            if (count[s.charAt(end)] > 0) {
-                len--;
-            }
-
-            count[s.charAt(end++)]--;
-
-            while (len == 0) {
-                // minlen = Math.min(end - start + 1, minlen);
-                System.out.println("The end is: " + end);
-                if (minlen > end - start){
-                    minlen = end - start;
-                    startIdx = start;
-                    System.out.println(startIdx + " " + end);
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == '(') {
+                stack.push(i);
+            }else {
+                if(stack.isEmpty()) {
+                    startIdx = i;
+                }else {
+                    stack.pop();
+                    if (stack.isEmpty()) {
+                        System.out.println(startIdx);
+                        len = Math.max(len, i - startIdx);
+                    }else {
+                        len = Math.max(len, i - stack.peek());
+                    }
                 }
-
-                char c = s.charAt(start);
-                if (count[c] == 0) {
-                    len++;
-                }
-                count[c]++;
-                start++;
-                System.out.println("The start is: " + start);
-                
-
             }
         }
-
     }
 
-    public static void Bad() {
-        throw new Error();
+    public static String shortestPalindrome(String s) {
+        int j = 0;
+
+        for (int i = s.length() - 1; i >= 0; i--) {
+            if (s.charAt(i) == s.charAt(j)) {
+                j++;
+            }
+        }
+
+        if (j == s.length()) return s;
+        String suffix = s.substring(j);
+        System.out.println(suffix + j);
+        return new StringBuffer(suffix).reverse().toString() + shortestPalindrome(s.substring(0, j)) + suffix;
     }
 }
