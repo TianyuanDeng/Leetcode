@@ -7,43 +7,22 @@ public class TestCase {
     private static int[] dp;
 
     public static void main(String[] args) {
-        int x = 121;
-        String s = "()";
-        Stack<Integer> stack = new Stack<>();
-        int startIdx = -1;
+        int[] nums = {10,9,2,5,3,7,101,18};
+        int[] dp = new int[nums.length];
+
         int len = 0;
-
-        for (int i = 0; i < s.length(); i++) {
-            if (s.charAt(i) == '(') {
-                stack.push(i);
-            }else {
-                if(stack.isEmpty()) {
-                    startIdx = i;
-                }else {
-                    stack.pop();
-                    if (stack.isEmpty()) {
-                        System.out.println(startIdx);
-                        len = Math.max(len, i - startIdx);
-                    }else {
-                        len = Math.max(len, i - stack.peek());
-                    }
-                }
+        for (int num : nums) {
+            int i = Arrays.binarySearch(dp, 0, len, num);
+            System.out.println(i + ", nums: " + num);
+            if (i < 0) {
+                i = -(i + 1);
             }
-        }
-    }
-
-    public static String shortestPalindrome(String s) {
-        int j = 0;
-
-        for (int i = s.length() - 1; i >= 0; i--) {
-            if (s.charAt(i) == s.charAt(j)) {
-                j++;
+            dp[i] = num;
+            if (i == len) {
+                len++;
             }
-        }
 
-        if (j == s.length()) return s;
-        String suffix = s.substring(j);
-        System.out.println(suffix + j);
-        return new StringBuffer(suffix).reverse().toString() + shortestPalindrome(s.substring(0, j)) + suffix;
+            System.out.println(len);
+        }
     }
 }
