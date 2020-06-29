@@ -2,7 +2,7 @@ package LinkedList;
 
 import java.util.List;
 
-public class SwapNodesInPair24 {
+public class SwapNodesInPair_24 {
      public ListNode swapPairs(ListNode head) throws Exception {
         if (head == null || head.next == null) {
             throw new Exception("Input can be empty!");
