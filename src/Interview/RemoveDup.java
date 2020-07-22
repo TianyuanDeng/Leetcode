@@ -1,7 +1,6 @@
-package AntraInterview;
+package Interview;
 
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * Given a string which contains only lowercase letters, remove duplicate letters so that every letter appears once and only once.

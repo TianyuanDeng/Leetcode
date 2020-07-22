@@ -1,4 +1,4 @@
-package AntraInterview;
+package Interview;
 
 /**
  *  *  Insert asterisk between different characters in a given String.
