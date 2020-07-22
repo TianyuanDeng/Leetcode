@@ -1,5 +1,10 @@
 package AntraInterview;
 
+/**
+ *  *  Insert asterisk between different characters in a given String.
+ *  *    eg, Input = "aabbcde", output = "aa*bb*c*d*e"
+ *  *    use recursion.
+ */
 public class Asterisk {
     public static void main(String[] args) {
         String s = "aabbcde";
