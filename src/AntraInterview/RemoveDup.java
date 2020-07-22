@@ -10,12 +10,12 @@ import java.util.List;
  * Input: "bcabc"
  * Output: "abc"
  */
+
 class RemoveDup {
     public static void main(String[] args) {
         String s = "bcabc";
         System.out.println(removeDuplicateLetters(s));
         int[] nums = {1,3,5,2,8,11,1,2,3,2,4,5};
-        //int[] nums = {1,1,2};
         int[] start = (removeDuplicateNumbers(nums));
         for (int n : start) {
             System.out.println(n);
