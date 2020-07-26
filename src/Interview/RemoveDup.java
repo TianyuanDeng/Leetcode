@@ -1,6 +1,7 @@
 package Interview;
 
 import java.util.Arrays;
+import java.util.Stack;
 
 /**
  * Given a string which contains only lowercase letters, remove duplicate letters so that every letter appears once and only once.
@@ -12,15 +13,13 @@ import java.util.Arrays;
 
 class RemoveDup {
     public static void main(String[] args) {
-        String s = "bcabc";
-        System.out.println(removeDuplicateLetters(s));
+        String s = "cdadabcc";
+        System.out.println(removeDuplicateLetters2(s));
         int[] nums = {1,3,5,2,8,11,1,2,3,2,4,5};
-        int[] start = (removeDuplicateNumbers(nums));
-        for (int n : start) {
-            System.out.println(n);
-        }
+        System.out.println(Arrays.toString(removeDuplicateNumbers(nums)));
     }
 
+    //lexicographical order
     public static String removeDuplicateLetters(String s) {
         int[] letters = new int[26];
         for (int i = 0; i < s.length(); i++) {
@@ -28,14 +27,48 @@ class RemoveDup {
         }
 
         StringBuilder sb  = new StringBuilder();
-        for (int i = 0; i <  s.length(); i++) {
+        for (int i = 0; i <  letters.length; i++) {
             if (letters[i] > 0) {
                 sb.append((char)(i + 'a'));
             }
         }
 
-        String result = sb.toString();
-        return result;
+        return sb.toString();
+    }
+
+    /**
+     *
+     * Input: "cbacdcbc"
+     * output: "acdb"
+     */
+    public static String removeDuplicateLetters2(String s) {
+        int[] letters = new int[26];
+        for (int i = 0; i < s.length(); i++) {
+            letters[s.charAt(i) - 'a'] = i;
+        }
+
+        Stack<Character> stack = new Stack<>();
+        boolean[] occur = new boolean[26];
+
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (occur[c - 'a']) continue;
+
+            while (!stack.isEmpty() && stack.peek() > c && letters[stack.peek() - 'a'] > i) {
+                occur[c - 'a'] = false;
+                stack.pop();
+            }
+
+            stack.push(c);
+            occur[c - 'a'] = true;
+        }
+
+        StringBuilder sb = new StringBuilder();
+        while(!stack.isEmpty()) {
+            sb.insert(0, stack.pop());
+        }
+
+        return sb.toString();
     }
 
     public static int[] removeDuplicateNumbers(int[] nums) {
@@ -47,11 +80,11 @@ class RemoveDup {
                 start++;
             }
         }
+        System.out.println(Arrays.toString(nums));
+
         start++;
         int[] result = new int[start];
-        for (int i = 0; i < start; i++) {
-            result[i] = nums[i];
-        }
+        System.arraycopy(nums, 0, result, 0, start);
 
         return result;
     }
