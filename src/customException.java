@@ -1,3 +1,11 @@
+/**
+ * Java provides us facility to create our own exceptions which are basically derived classes of Exception.
+ * For example MyException in below code extends the Exception class.
+ *
+ * We pass the string to the constructor of the super class- Exception
+ * which is obtained using “getMessage()” function on the object created.
+ */
+
 class MyException extends Exception {
     public MyException(String s){
         super(s);
@@ -14,5 +22,8 @@ public class customException {
             System.out.println("Caught");
             System.out.println(ex.getMessage());
         }
+
     }
 }
+
+
