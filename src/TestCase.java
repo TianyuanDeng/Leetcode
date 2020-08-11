@@ -9,7 +9,7 @@
  * }
  *
  */
-class Solution {
+class TestCase {
 
 
 }
